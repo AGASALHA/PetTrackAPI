@@ -29,4 +29,9 @@ public class User {
 
     @Column(nullable = false)
     private String cpf_cnpj;
+
+
+    @Column(nullable = false)
+    private String cep;
+
 }
