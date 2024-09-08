@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Long id;
+    @OneToOne
+    private Long user_id;
 
     @Column(nullable = false)
     private String name;
