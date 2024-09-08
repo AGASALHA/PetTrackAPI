@@ -15,7 +15,6 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     @Column(nullable = false)
