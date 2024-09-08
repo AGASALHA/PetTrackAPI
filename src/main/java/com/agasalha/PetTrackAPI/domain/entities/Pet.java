@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
