@@ -1,31 +1,37 @@
 package com.agasalha.PetTrackAPI.domain.entities;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "Pet")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
-public class Pet {
+public class QRCode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column
     @OneToOne
-    private Long id;
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
 
-    @Column(nullable = false)
-    private String name;
+    @Column
+    private String uuid;
 
-    @Column(nullable = false)
-    private String raça;
+    @Column
+    private LocalDate activation_date;
 
-    @Column(nullable = false)
-    private String peso;
+    @Column
+    private Boolean is_active;
 
-    @Column(nullable = false)
-    private String idade;
 }
