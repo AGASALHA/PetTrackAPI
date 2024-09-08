@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToOne
     private Long id;
 
     @Column(nullable = false)

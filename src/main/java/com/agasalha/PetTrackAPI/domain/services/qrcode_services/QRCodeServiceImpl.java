@@ -4,6 +4,7 @@ import com.agasalha.PetTrackAPI.domain.dtos.qrcode.request.QRCodeRequestDTO;
 import com.agasalha.PetTrackAPI.domain.dtos.qrcode.response.QRCodeResponseDTO;
 import com.agasalha.PetTrackAPI.domain.entities.QRCode;
 import com.agasalha.PetTrackAPI.infrastructure.repository.QRCodeRepository;
+import com.agasalha.PetTrackAPI.infrastructure.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -12,14 +13,19 @@ import java.util.UUID;
 public class QRCodeServiceImpl implements QRCodeServiceInterface{
 
     private final QRCodeRepository qrCodeRepository;
+    private final UserRepository userRepository;
 
-    public QRCodeServiceImpl(QRCodeRepository qrCodeRepository){this.qrCodeRepository = qrCodeRepository;};
+    public QRCodeServiceImpl(QRCodeRepository qrCodeRepository, UserRepository userRepository){
+        this.qrCodeRepository = qrCodeRepository;
+        this.userRepository = userRepository;
+    };
 
     @Override
     public QRCodeResponseDTO save(QRCodeRequestDTO qrCodeRequestDTO) {
         QRCode qrCode = new QRCode();
         qrCode.setUuid(generateUUID());
         qrCode.setPet((petRepository.findById(qrCodeRequestDTO.getPet_id))).orElseThrow(); //preciso do repositorio CRUD de Pets!
+        qrCode.setUser(userRepository.findById(qrCodeRequestDTO.getUser_id()).orElseThrow());
         qrCode.setActivation_date(LocalDate.now());
         qrCode.setIs_active(Boolean.TRUE);
         QRCode savedQRCode = qrCodeRepository.save(qrCode);
