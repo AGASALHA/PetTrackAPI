@@ -1,8 +1,8 @@
 package com.agasalha.PetTrackAPI.controller;
 
 
-import com.agasalha.PetTrackAPI.domain.dtos.request.UserRequestDto;
-import com.agasalha.PetTrackAPI.domain.dtos.response.UserResponseDto;
+import com.agasalha.PetTrackAPI.domain.dtos.user.request.UserRequestDto;
+import com.agasalha.PetTrackAPI.domain.dtos.user.response.UserResponseDto;
 import com.agasalha.PetTrackAPI.domain.services.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

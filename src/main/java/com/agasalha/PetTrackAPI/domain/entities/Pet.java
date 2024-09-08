@@ -6,21 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Pet")
+@Table(name = "pet")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToOne
     private Long id;
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
-    private String raça;
+    private String raca;
 
     @Column(nullable = false)
     private String peso;

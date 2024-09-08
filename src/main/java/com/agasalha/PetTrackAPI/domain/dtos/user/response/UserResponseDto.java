@@ -1,4 +1,4 @@
-package com.agasalha.PetTrackAPI.domain.dtos.user.response.response;
+package com.agasalha.PetTrackAPI.domain.dtos.user.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +15,5 @@ public class UserResponseDto {
     private String password;
     private String cpf_cnpj;
     private  String cep;
+
 }

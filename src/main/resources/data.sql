@@ -1,4 +1,4 @@
-CREATE TABLE USERS (
+iCREATE TABLE USERS (
         USER_ID INTEGER PRIMARY KEY AUTO_INCREMENT,  -- Coluna ID é a chave primária, do tipo INTEGER, e será auto-incrementada automaticamente pelo banco de dados.
         NAME VARCHAR(255) NOT NULL,                      -- Coluna NAME armazena o nome do usuário, com um máximo de 255 caracteres.
         EMAIL VARCHAR(255) NOT NULL,
