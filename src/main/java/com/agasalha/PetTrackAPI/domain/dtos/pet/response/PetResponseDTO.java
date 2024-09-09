@@ -1,4 +1,4 @@
-package com.agasalha.PetTrackAPI.domain.dtos.pet.request.response;
+package com.agasalha.PetTrackAPI.domain.dtos.pet.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

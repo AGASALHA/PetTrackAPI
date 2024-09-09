@@ -1,4 +1,4 @@
-package com.agasalha.PetTrackAPI.domain.dtos.pet.request.request;
+package com.agasalha.PetTrackAPI.domain.dtos.pet.request;
 
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,5 +12,5 @@ public class PetRequestDTO {
     private String raca;
     private String peso;
     private String idade;
-
 }
+
