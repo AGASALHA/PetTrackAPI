@@ -5,11 +5,13 @@ import com.agasalha.PetTrackAPI.domain.dtos.qrcode.response.QRCodeResponseDTO;
 import com.agasalha.PetTrackAPI.domain.entities.QRCode;
 import com.agasalha.PetTrackAPI.infrastructure.repository.QRCodeRepository;
 import com.agasalha.PetTrackAPI.infrastructure.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class QRCodeServiceImpl implements QRCodeServiceInterface{
 
     private final QRCodeRepository qrCodeRepository;
@@ -51,4 +53,6 @@ public class QRCodeServiceImpl implements QRCodeServiceInterface{
             return uuid_string;
         }
     }
+
+
 }
