@@ -33,13 +33,23 @@ public class PetController {
         return petService.save(petRequestDTO);
     }
 
-    @PutMapping("/{id}")
-    public PetResponseDTO updatePet(@PathVariable Long id, @RequestBody PetRequestDTO petRequestDTO) {
-        return petService.updatePet(id, petRequestDTO);
+    @GetMapping
+    public List<PetResponseDTO> getAllPets() {
+        return petService.findAllPets();
     }
+
+    @GetMapping("/{id}")
+    public PetResponseDTO getPetById(@PathVariable Long id) {
+        return petService.findPetById(id)
+                .orElseThrow(() -> new RuntimeException("Pet not found with id: " + id));
+    }
+
+    @PutMapping("/{id}")
+        public PetResponseDTO updatePet(@PathVariable Long id, @RequestBody PetRequestDTO petRequestDTO) {
+            return petService.updatePet(id, petRequestDTO);
+        }
 
     @DeleteMapping("/{id}")
     public void deletePet(@PathVariable Long id) {
         petService.deletePet(id);
     }
-}
