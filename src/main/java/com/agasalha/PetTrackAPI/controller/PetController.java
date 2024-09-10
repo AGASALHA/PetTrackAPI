@@ -27,21 +27,5 @@ public class PetController {
         this.petService = petService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Pet>> getAllPets(){
-        List<Pet> pets = petService.findAllPets();
-        return new ResponseEntity<>(pets, HttpStatus.OK);
-    }
-
-    @GetMapping
-    public ResponseEntity<Pet> getPetById(PathVariable Long Id) {
-
-        Optional<Pet> pet = petService.findPetById(Id);
-        return pet.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-
-    }
-
-
 }
 
