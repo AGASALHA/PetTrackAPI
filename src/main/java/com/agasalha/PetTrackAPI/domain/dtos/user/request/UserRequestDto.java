@@ -1,4 +1,4 @@
-package com.agasalha.PetTrackAPI.domain.dtos.request;
+package com.agasalha.PetTrackAPI.domain.dtos.user.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ public class UserRequestDto {
 
 
     private String name;
-    private  String email;
+    private String email;
     private String password;
     private String cpf_cnpj;
     private String cep;
