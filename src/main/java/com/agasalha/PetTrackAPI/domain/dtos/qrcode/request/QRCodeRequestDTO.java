@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 public class QRCodeRequestDTO {
-    private long pet_id;
+    private Long pet_id;
     private String uuid;
     private LocalDate activation_date;
     private Boolean is_active;
