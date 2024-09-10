@@ -10,6 +10,7 @@ import com.agasalha.PetTrackAPI.infrastructure.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -79,5 +80,15 @@ public class PetServiceImpl implements PetServiceInterface {
         } else {
             throw new RuntimeException("Pet not found with id: " + Id);
         }
+    }
+
+    @Override
+    public List<PetResponseDTO> findAllPets() {
+        return List.of();
+    }
+
+    @Override
+    public Optional<PetResponseDTO> findPetById(Long Id) {
+        return Optional.empty();
     }
 }
