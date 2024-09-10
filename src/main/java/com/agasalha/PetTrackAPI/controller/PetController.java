@@ -45,11 +45,12 @@ public class PetController {
     }
 
     @PutMapping("/{id}")
-        public PetResponseDTO updatePet(@PathVariable Long id, @RequestBody PetRequestDTO petRequestDTO) {
-            return petService.updatePet(id, petRequestDTO);
-        }
+    public PetResponseDTO updatePet(@PathVariable Long id, @RequestBody PetRequestDTO petRequestDTO) {
+        return petService.updatePet(id, petRequestDTO);
+    }
 
     @DeleteMapping("/{id}")
     public void deletePet(@PathVariable Long id) {
         petService.deletePet(id);
     }
+}
