@@ -1,7 +1,7 @@
 package com.agasalha.PetTrackAPI.domain.services;
 
-import com.agasalha.PetTrackAPI.domain.dtos.request.UserRequestDto;
-import com.agasalha.PetTrackAPI.domain.dtos.response.UserResponseDto;
+import com.agasalha.PetTrackAPI.domain.dtos.user.request.UserRequestDto;
+import com.agasalha.PetTrackAPI.domain.dtos.user.response.UserResponseDto;
 
 public interface UserServiceInterface {
 

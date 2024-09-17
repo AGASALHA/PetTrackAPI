@@ -2,7 +2,9 @@ package com.agasalha.PetTrackAPI.domain.services.qrcode_services;
 
 import com.agasalha.PetTrackAPI.domain.dtos.qrcode.request.QRCodeRequestDTO;
 import com.agasalha.PetTrackAPI.domain.dtos.qrcode.response.QRCodeResponseDTO;
+import com.agasalha.PetTrackAPI.domain.entities.Pet;
 import com.agasalha.PetTrackAPI.domain.entities.QRCode;
+import com.agasalha.PetTrackAPI.infrastructure.repository.PetRepository;
 import com.agasalha.PetTrackAPI.infrastructure.repository.QRCodeRepository;
 import com.agasalha.PetTrackAPI.infrastructure.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -20,18 +22,23 @@ public class QRCodeServiceImpl implements QRCodeServiceInterface{
     public QRCodeServiceImpl(QRCodeRepository qrCodeRepository, UserRepository userRepository){
         this.qrCodeRepository = qrCodeRepository;
         this.userRepository = userRepository;
+
     };
 
     @Override
     public QRCodeResponseDTO save(QRCodeRequestDTO qrCodeRequestDTO) {
+        //cria novo QrCode
         QRCode qrCode = new QRCode();
         qrCode.setUuid(generateUUID());
         qrCode.setPet((petRepository.findById(qrCodeRequestDTO.getPet_id))).orElseThrow(); //preciso do repositorio CRUD de Pets!
         qrCode.setUser(userRepository.findById(qrCodeRequestDTO.getUser_id()).orElseThrow());
+
         qrCode.setActivation_date(LocalDate.now());
         qrCode.setIs_active(Boolean.TRUE);
+        //Salva o Qrcode no repository
         QRCode savedQRCode = qrCodeRepository.save(qrCode);
 
+        //Cria o DTO da resposta
         QRCodeResponseDTO qrCodeResponseDTO = new QRCodeResponseDTO();
         qrCodeResponseDTO.setUuid(savedQRCode.getUuid());
         qrCodeResponseDTO.setPet_id(savedQRCode.getPet().getId());
@@ -42,7 +49,6 @@ public class QRCodeServiceImpl implements QRCodeServiceInterface{
         return qrCodeResponseDTO;
 
     }
-
     public String generateUUID(){
         UUID uuid = UUID.randomUUID();
         String uuid_string = uuid.toString();
