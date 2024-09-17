@@ -8,6 +8,7 @@ import lombok.Data;
 @NoArgsConstructor
 public class PetRequestDTO {
 
+    private long user_id;
     private String name;
     private String raca;
     private String peso;

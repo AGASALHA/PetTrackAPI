@@ -24,6 +24,10 @@ public class Pet {
     @Column(nullable = false)
     private String peso;
 
-    @Column(nullable = false)
+    @Column
     private String idade;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

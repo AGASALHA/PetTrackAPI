@@ -7,6 +7,7 @@ import com.agasalha.PetTrackAPI.domain.entities.Pet;
 import com.agasalha.PetTrackAPI.domain.entities.User;
 import com.agasalha.PetTrackAPI.infrastructure.repository.PetRepository;
 import com.agasalha.PetTrackAPI.infrastructure.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,12 @@ import java.util.Optional;
 public class PetServiceImpl implements PetServiceInterface {
 
     private final PetRepository petRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public PetServiceImpl(PetRepository petRepository) {
+    public PetServiceImpl(PetRepository petRepository, UserRepository userRepository) {
         this.petRepository = petRepository;
+        this.userRepository = userRepository;
     }
 
     //salva novo pet
@@ -33,6 +36,10 @@ public class PetServiceImpl implements PetServiceInterface {
         pet.setRaca(petRequestDTO.getRaca());
         pet.setPeso(petRequestDTO.getPeso());
         pet.setIdade(petRequestDTO.getIdade());
+
+        User user = userRepository.findById(petRequestDTO.getUser_id())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        pet.setUser(user);
 
         Pet savedPet = petRepository.save(pet);
 
@@ -47,6 +54,7 @@ public class PetServiceImpl implements PetServiceInterface {
         responseDTO.setRaca(pet.getRaca());
         responseDTO.setPeso(pet.getPeso());
         responseDTO.setIdade(pet.getIdade());
+        responseDTO.setPet_id(pet.getId());
         return responseDTO;
     }
 
