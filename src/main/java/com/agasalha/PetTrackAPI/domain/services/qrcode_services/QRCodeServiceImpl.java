@@ -6,21 +6,23 @@ import com.agasalha.PetTrackAPI.domain.entities.Pet;
 import com.agasalha.PetTrackAPI.domain.entities.QRCode;
 import com.agasalha.PetTrackAPI.infrastructure.repository.PetRepository;
 import com.agasalha.PetTrackAPI.infrastructure.repository.QRCodeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.agasalha.PetTrackAPI.infrastructure.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class QRCodeServiceImpl implements QRCodeServiceInterface{
 
     private final QRCodeRepository qrCodeRepository;
-    private final PetRepository petRepository;
+    private final UserRepository userRepository;
 
-    //Construtor
-    public QRCodeServiceImpl(QRCodeRepository qrCodeRepository, PetRepository petRepository){
+    public QRCodeServiceImpl(QRCodeRepository qrCodeRepository, UserRepository userRepository){
         this.qrCodeRepository = qrCodeRepository;
-        this.petRepository = petRepository;
+        this.userRepository = userRepository;
+
     };
 
     @Override
@@ -28,12 +30,9 @@ public class QRCodeServiceImpl implements QRCodeServiceInterface{
         //cria novo QrCode
         QRCode qrCode = new QRCode();
         qrCode.setUuid(generateUUID());
-        // Obter o ID do pet Dto
-        Long petId = qrCodeRequestDTO.getPet_id();
-        //Busca pet pelo ID
-        Pet pet = petRepository.findById(petId).orElseThrow(() -> new RuntimeException("Pet not found"));
-        qrCode.setPet(pet);
-        //Configura outros campos do Qrcode
+        qrCode.setPet((petRepository.findById(qrCodeRequestDTO.getPet_id))).orElseThrow(); //preciso do repositorio CRUD de Pets!
+        qrCode.setUser(userRepository.findById(qrCodeRequestDTO.getUser_id()).orElseThrow());
+
         qrCode.setActivation_date(LocalDate.now());
         qrCode.setIs_active(Boolean.TRUE);
         //Salva o Qrcode no repository
@@ -50,7 +49,6 @@ public class QRCodeServiceImpl implements QRCodeServiceInterface{
         return qrCodeResponseDTO;
 
     }
-    //gera um Id unico
     public String generateUUID(){
         UUID uuid = UUID.randomUUID();
         String uuid_string = uuid.toString();
@@ -61,4 +59,6 @@ public class QRCodeServiceImpl implements QRCodeServiceInterface{
             return uuid_string;
         }
     }
+
+
 }
