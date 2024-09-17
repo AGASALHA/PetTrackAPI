@@ -27,7 +27,7 @@ public class QRCode {
     private User user;
 
     @Column
-    private String uuid;
+    private String UUID;
 
     @Column
     private LocalDate activation_date;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 public class PetResponseDTO {
 
+    //TODO ADICIONAR PET_ID NO RETORNO DAS REQUISIÇÕES
     private String name;
     private String raca;
     private String peso;

@@ -5,4 +5,5 @@ import com.agasalha.PetTrackAPI.domain.dtos.qrcode.response.QRCodeResponseDTO;
 
 public interface QRCodeServiceInterface {
     QRCodeResponseDTO save(QRCodeRequestDTO qrCodeRequestDTO);
+    QRCodeResponseDTO get(Long id);
 }
