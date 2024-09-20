@@ -49,6 +49,7 @@ public class QRCodeServiceImpl implements QRCodeServiceInterface{
         QRCodeResponseDTO qrCodeResponseDTO = new QRCodeResponseDTO();
         qrCodeResponseDTO.setUuid(savedQRCode.getUUID());
         qrCodeResponseDTO.setPet_id(savedQRCode.getPet().getId());
+        qrCodeResponseDTO.setUser_id(savedQRCode.getUser().getId());
         qrCodeResponseDTO.setQrcode_id(savedQRCode.getId());
         qrCodeResponseDTO.setIs_active(savedQRCode.getIs_active());
         qrCodeResponseDTO.setActivation_date(savedQRCode.getActivation_date());
