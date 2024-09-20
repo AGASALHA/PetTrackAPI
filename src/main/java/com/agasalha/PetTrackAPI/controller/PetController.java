@@ -27,7 +27,7 @@ public class PetController {
     public PetController(PetServiceInterface petService) {
         this.petService = petService;
     }
-
+//TODO NORMALIZAR NOME DAS CHAMADAS DE API ENTRE TODOS CONTROLLERS
     @PostMapping("/cadastrar")
     public PetResponseDTO save(@RequestBody PetRequestDTO petRequestDTO) {
         return petService.save(petRequestDTO);

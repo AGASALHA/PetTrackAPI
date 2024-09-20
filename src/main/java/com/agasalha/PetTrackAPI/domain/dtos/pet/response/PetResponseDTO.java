@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 public class PetResponseDTO {
 
+    private long pet_id;
     private String name;
     private String raca;
     private String peso;

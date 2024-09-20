@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Pet")
+@Table(name = "QRCODE")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -27,7 +27,7 @@ public class QRCode {
     private User user;
 
     @Column
-    private String uuid;
+    private String UUID;
 
     @Column
     private LocalDate activation_date;
