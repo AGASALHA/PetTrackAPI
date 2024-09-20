@@ -16,7 +16,7 @@ CREATE TABLE PET (
     RACA VARCHAR(50),
     SEXO INTEGER, --Visando eficiencia será salvo em int p/ tipo
     PORTE INTEGER, --Visando eficiencia será salvo em int p/ tipo
-    TEMPERAMENTO INTEGER, --Visando eficiencia será salvo em int p/ tipo
+    TEMPERAMENTO INTEGER, --Visando eficiencia será salvo em int por tipo
     COR_PELO INTEGER,
     DATA_NASC DATE
 );
