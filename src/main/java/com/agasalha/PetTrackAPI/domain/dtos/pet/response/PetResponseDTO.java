@@ -1,15 +1,18 @@
 package com.agasalha.PetTrackAPI.domain.dtos.pet.response;
 
 import lombok.Data;
-
-import java.time.LocalDate;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Data
+@NoArgsConstructor
+
 public class PetResponseDTO {
 
-    public Long id;
-    public String name;
-    public   String raca;
-    public String peso;
-    public String idade;
+    private long pet_id;
+    private String name;
+    private String raca;
+    private String peso;
+    private String idade;
+
 }

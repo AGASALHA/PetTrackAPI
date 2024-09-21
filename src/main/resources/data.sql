@@ -1,5 +1,5 @@
 CREATE TABLE USERS (
-        USER_ID INTEGER PRIMARY KEY AUTO_INCREMENT,  -- Coluna ID é a chave primária, do tipo INTEGER, e será auto-incrementada automaticamente pelo banco de dados.
+        ID INTEGER PRIMARY KEY AUTO_INCREMENT,  -- Coluna ID é a chave primária, do tipo INTEGER, e será auto-incrementada automaticamente pelo banco de dados.
         NAME VARCHAR(255) NOT NULL,                      -- Coluna NAME armazena o nome do usuário, com um máximo de 255 caracteres.
         EMAIL VARCHAR(255) NOT NULL,
         PASSWORD VARCHAR(64) NOT NULL,
@@ -8,23 +8,23 @@ CREATE TABLE USERS (
         IS_ACTIVE BOOLEAN DEFAULT TRUE
 );
 
-CREATE TABLE PETS (
-    PET_ID INTEGER PRIMARY KEY AUTO_INCREMENT,
-    USER_ID INTEGER REFERENCES USERS(USER_ID) ON UPDATE CASCADE ON DELETE CASCADE,
-    NAME VARCHAR(255) NOT NULL,
-    DATA_ADOCAO DATE NOT NULL,
-    RACA VARCHAR(50) NOT NULL,
-    SEXO INTEGER NOT NULL, --Visando eficiencia será salvo em int p/ tipo
-    PORTE INTEGER NOT NULL, --Visando eficiencia será salvo em int p/ tipo
-    TEMPERAMENTO INTEGER NOT NULL, --Visando eficiencia será salvo em int p/ tipo
-    COR_PELO INTEGER NOT NULL,
+CREATE TABLE PET (
+    ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    USER_ID INTEGER REFERENCES USERS(ID) ON UPDATE CASCADE ON DELETE CASCADE,
+    NAME VARCHAR(255),
+    DATA_ADOCAO DATE,
+    RACA VARCHAR(50),
+    SEXO INTEGER, --Visando eficiencia será salvo em int p/ tipo
+    PORTE INTEGER, --Visando eficiencia será salvo em int p/ tipo
+    TEMPERAMENTO INTEGER, --Visando eficiencia será salvo em int p/ tipo
+    COR_PELO INTEGER,
     DATA_NASC DATE
 );
 
 CREATE TABLE QRCODE (
-    QR_ID INTEGER PRIMARY KEY AUTO_INCREMENT,
-    PET_ID INTEGER REFERENCES PETS(PET_ID) UNIQUE,
-    USER_ID INTEGER REFERENCES USERS(USER_ID),
+    ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    PET_ID INTEGER REFERENCES PET(ID) UNIQUE,
+    USER_ID INTEGER REFERENCES USERS(ID),
     UUID VARCHAR(36),
     ACTIVATION_DATE DATETIME,
     IS_ACTIVE BOOLEAN

@@ -1,20 +1,37 @@
 package com.agasalha.PetTrackAPI.domain.services;
 
 
-import com.agasalha.PetTrackAPI.domain.dtos.request.UserRequestDto;
-import com.agasalha.PetTrackAPI.domain.dtos.response.UserResponseDto;
+import com.agasalha.PetTrackAPI.domain.dtos.pet.request.PetRequestDTO;
+import com.agasalha.PetTrackAPI.domain.dtos.pet.response.PetResponseDTO;
+import com.agasalha.PetTrackAPI.domain.dtos.user.request.UserRequestDto;
+import com.agasalha.PetTrackAPI.domain.dtos.user.response.UserResponseDto;
+import com.agasalha.PetTrackAPI.domain.entities.Pet;
 import com.agasalha.PetTrackAPI.domain.entities.User;
+import com.agasalha.PetTrackAPI.infrastructure.repository.PetRepository;
 import com.agasalha.PetTrackAPI.infrastructure.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserServiceInterface{
 
     private final UserRepository userRepository;
+    private final PetServiceInterface petService;
+    private final PetRepository petRepository;
+
+
+
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository){this.userRepository = userRepository;}
+    public UserServiceImpl(UserRepository userRepository,PetRepository petRepository,PetServiceInterface petService)
+        {
+            this.userRepository = userRepository;
+            this.petService = petService;
+            this.petRepository = petRepository;
+        }
 
     public UserResponseDto save (UserRequestDto userRequestDto){
         User user = new User();
@@ -26,8 +43,22 @@ public class UserServiceImpl implements UserServiceInterface{
 
         User savedUser = userRepository.save(user);
 
-
         return getUserDto(savedUser);
+    }
+
+    @Override
+    @Transactional
+    public UserResponseDto addPetToUser(Long userId, PetRequestDTO novoPet) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        PetResponseDTO petResponseDTO = petService.save(novoPet);
+
+        user.addPet(petRepository.findPetById(petResponseDTO.getPet_id()).orElseThrow());
+
+        userRepository.save(user);
+
+        return getUserDto(user);
     }
 
 
@@ -47,5 +78,8 @@ public class UserServiceImpl implements UserServiceInterface{
     }
 
 
+    //atualizar Pet
+    //@Override
+    
 
 }
