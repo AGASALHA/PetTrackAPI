@@ -7,6 +7,8 @@ import com.agasalha.PetTrackAPI.domain.services.qrcode_services.QRCodeServiceInt
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("api/qrcode/")
 public class QRCodeController {
@@ -16,7 +18,7 @@ public class QRCodeController {
     public QRCodeController (QRCodeServiceInterface qrCodeService){this.qrCodeService = qrCodeService;}
 
     @PostMapping("/save")
-    public QRCodeResponseDTO save (@RequestBody QRCodeRequestDTO qrCodeRequestDTO){
+    public QRCodeResponseDTO save (@RequestBody QRCodeRequestDTO qrCodeRequestDTO) throws IOException {
         return  qrCodeService.save(qrCodeRequestDTO);
     }
 

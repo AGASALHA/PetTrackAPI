@@ -16,7 +16,7 @@ CREATE TABLE PET (
     RACA VARCHAR(50),
     SEXO INTEGER, --Visando eficiencia será salvo em int p/ tipo
     PORTE INTEGER, --Visando eficiencia será salvo em int p/ tipo
-    TEMPERAMENTO INTEGER, --Visando eficiencia será salvo em int p/ tipo
+    TEMPERAMENTO INTEGER, --Visando eficiencia será salvo em int por tipo
     COR_PELO INTEGER,
     DATA_NASC DATE
 );
@@ -26,6 +26,7 @@ CREATE TABLE QRCODE (
     PET_ID INTEGER REFERENCES PET(ID) UNIQUE,
     USER_ID INTEGER REFERENCES USERS(ID),
     UUID VARCHAR(36),
+    IMG_QR VARCHAR(MAX), --  quando no postgre IMG_QR BYTEA,
     ACTIVATION_DATE DATETIME,
     IS_ACTIVE BOOLEAN
 );

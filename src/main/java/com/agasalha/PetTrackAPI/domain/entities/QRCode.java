@@ -29,6 +29,9 @@ public class QRCode {
     @Column
     private String UUID;
 
+    @Column(length = 22599)
+    private byte[] blob;
+
     @Column
     private LocalDate activation_date;
 
