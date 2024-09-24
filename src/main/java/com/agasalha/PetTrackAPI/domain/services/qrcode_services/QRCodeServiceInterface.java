@@ -13,4 +13,6 @@ public interface QRCodeServiceInterface {
     String generateUUID();
     byte[] generateBlobFromImg(String uuid) throws IOException;
     BufferedImage generateImgFromQrCode(QrCode qr, int scale, int border, int lightColor, int darkColor);
+    QRCodeResponseDTO getByUUID(String uuid);
+
 }
