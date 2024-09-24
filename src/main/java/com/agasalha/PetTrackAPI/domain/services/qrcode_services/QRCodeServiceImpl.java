@@ -106,7 +106,7 @@ public class QRCodeServiceImpl implements QRCodeServiceInterface{
 
     @Override
     public byte[] generateBlobFromImg(String uuid) throws IOException {
-        QrCode qr = QrCode.encodeText(uuid, QrCode.Ecc.MEDIUM);
+        QrCode qr = QrCode.encodeText("http://localhost:8081/api/pets/uuid/"+uuid, QrCode.Ecc.MEDIUM);
         BufferedImage img = generateImgFromQrCode(qr, 12,4, 0xFFFFFF, 0x000000);
         return imgToBlob(img);
 
@@ -130,6 +130,26 @@ public class QRCodeServiceImpl implements QRCodeServiceInterface{
         }
 
         return result;
+    }
+
+    @Override
+    public QRCodeResponseDTO getByUUID(String uuid) {
+        QRCode qrCodeByUUID = qrCodeRepository.findByUUID(uuid)
+                .orElseThrow(() -> new RuntimeException("QR não encontrado com ID " + uuid));
+        return this.buildQRCodeResponseDTO(qrCodeByUUID);
+    }
+
+    public QRCodeResponseDTO buildQRCodeResponseDTO(QRCode qrcode){
+        QRCodeResponseDTO responseDTO = new QRCodeResponseDTO();
+
+        responseDTO.setActivation_date(qrcode.getActivation_date());
+        responseDTO.setUuid(qrcode.getUUID());
+        responseDTO.setIs_active(qrcode.getIs_active());
+        responseDTO.setPet_id(qrcode.getPet().getId());
+        responseDTO.setUser_id(qrcode.getUser().getId());
+        responseDTO.setQrcode_id(qrcode.getId());
+
+        return responseDTO;
     }
 
     //TODO GET QR CODE IMG
