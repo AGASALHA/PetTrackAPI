@@ -10,6 +10,7 @@ public class QRCodeResponseDTO {
     public long pet_id;
     private long user_id;
     public String uuid;
+    public String blob;
     public LocalDate activation_date;
     public Boolean is_active;
 }

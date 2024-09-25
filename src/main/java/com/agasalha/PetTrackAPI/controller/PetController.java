@@ -40,8 +40,12 @@ public class PetController {
 
     @GetMapping("/{id}")
     public PetResponseDTO getPetById(@PathVariable Long id) {
-        return petService.findPetById(id)
-                .orElseThrow(() -> new RuntimeException("Pet not found with id: " + id));
+        return petService.findPetById(id);
+    }
+
+    @GetMapping("/uuid/{uuid}")
+    public PetResponseDTO getPetByUUID(@PathVariable String uuid) {
+        return petService.findPetByUUID(uuid);
     }
 
     @PutMapping("/{id}")

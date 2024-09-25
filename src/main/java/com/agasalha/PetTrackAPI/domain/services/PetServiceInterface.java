@@ -18,6 +18,7 @@ public interface PetServiceInterface {
 
     List<PetResponseDTO> findAllPets();
 
-    Optional<PetResponseDTO> findPetById(Long Id);
+    PetResponseDTO findPetById(Long Id);
 
+    PetResponseDTO findPetByUUID(String UUID);
 }
