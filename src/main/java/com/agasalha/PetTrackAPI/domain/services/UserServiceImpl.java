@@ -5,7 +5,6 @@ import com.agasalha.PetTrackAPI.domain.dtos.pet.request.PetRequestDTO;
 import com.agasalha.PetTrackAPI.domain.dtos.pet.response.PetResponseDTO;
 import com.agasalha.PetTrackAPI.domain.dtos.user.request.UserRequestDto;
 import com.agasalha.PetTrackAPI.domain.dtos.user.response.UserResponseDto;
-import com.agasalha.PetTrackAPI.domain.entities.Pet;
 import com.agasalha.PetTrackAPI.domain.entities.User;
 import com.agasalha.PetTrackAPI.infrastructure.repository.PetRepository;
 import com.agasalha.PetTrackAPI.infrastructure.repository.UserRepository;
@@ -13,7 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserServiceInterface{
@@ -45,6 +44,28 @@ public class UserServiceImpl implements UserServiceInterface{
 
         return getUserDto(savedUser);
     }
+
+    @Override
+    public UserResponseDto updateById(Long id, UserRequestDto userRequestDto) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+
+            User user = optionalUser.get();
+            user.setName(userRequestDto.getName());
+            user.setCep(userRequestDto.getCep());
+            user.setEmail(userRequestDto.getEmail());
+            user.setPassword(userRequestDto.getPassword());
+            user.setCpf_cnpj(userRequestDto.getCpf_cnpj());
+            user.setCep(userRequestDto.getCep());
+
+            User updateUser = userRepository.save(user);
+
+            return getUserDto(updateUser);
+        } else{
+            throw new RuntimeException("User nor found with id: "+ id);
+        }
+    }
+
 
     @Override
     @Transactional

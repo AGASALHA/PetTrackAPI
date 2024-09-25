@@ -7,5 +7,8 @@ import com.agasalha.PetTrackAPI.domain.entities.Pet;
 
 public interface UserServiceInterface {
     UserResponseDto save (UserRequestDto userRequestDto);
+
+    UserResponseDto updateById(Long id, UserRequestDto userRequestDto);
+
     UserResponseDto addPetToUser(Long userId, PetRequestDTO novoPet);
 }

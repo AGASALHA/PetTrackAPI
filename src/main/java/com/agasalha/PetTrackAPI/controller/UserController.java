@@ -4,6 +4,7 @@ package com.agasalha.PetTrackAPI.controller;
 import com.agasalha.PetTrackAPI.domain.dtos.pet.request.PetRequestDTO;
 import com.agasalha.PetTrackAPI.domain.dtos.user.request.UserRequestDto;
 import com.agasalha.PetTrackAPI.domain.dtos.user.response.UserResponseDto;
+import com.agasalha.PetTrackAPI.domain.entities.User;
 import com.agasalha.PetTrackAPI.domain.services.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,11 @@ public class UserController {
     public UserResponseDto save (@RequestBody UserRequestDto userRequestDto){
 
         return userService.save(userRequestDto);
+    }
+
+    @PutMapping("/user/{id}")
+    public UserResponseDto updateById(@PathVariable Long id, @RequestBody UserRequestDto userRequestDto) {
+        return userService.updateById(id, userRequestDto);
     }
 
     @PostMapping("/new_pet/{id}")
