@@ -11,4 +11,6 @@ public interface UserServiceInterface {
     UserResponseDto updateById(Long id, UserRequestDto userRequestDto);
 
     UserResponseDto addPetToUser(Long userId, PetRequestDTO novoPet);
+
+    void deleteUser(Long id);
 }

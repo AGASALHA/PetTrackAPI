@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users/")
+@RequestMapping("/users/")
 
 public class UserController {
 
@@ -21,13 +21,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/user")
+    @PostMapping("/cadastrar")
     public UserResponseDto save (@RequestBody UserRequestDto userRequestDto){
 
         return userService.save(userRequestDto);
     }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/{id}")
     public UserResponseDto updateById(@PathVariable Long id, @RequestBody UserRequestDto userRequestDto) {
         return userService.updateById(id, userRequestDto);
     }
@@ -39,6 +39,9 @@ public class UserController {
             ){
         return userService.addPetToUser(userId, petRequestDTO);
         }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {userService.deleteUser(id); }
 //todo finalizar CRUD USER
 
     }

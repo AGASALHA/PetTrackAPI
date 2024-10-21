@@ -5,6 +5,7 @@ import com.agasalha.PetTrackAPI.domain.dtos.pet.request.PetRequestDTO;
 import com.agasalha.PetTrackAPI.domain.dtos.pet.response.PetResponseDTO;
 import com.agasalha.PetTrackAPI.domain.dtos.user.request.UserRequestDto;
 import com.agasalha.PetTrackAPI.domain.dtos.user.response.UserResponseDto;
+import com.agasalha.PetTrackAPI.domain.entities.Pet;
 import com.agasalha.PetTrackAPI.domain.entities.User;
 import com.agasalha.PetTrackAPI.infrastructure.repository.PetRepository;
 import com.agasalha.PetTrackAPI.infrastructure.repository.UserRepository;
@@ -96,6 +97,16 @@ public class UserServiceImpl implements UserServiceInterface{
 
         // Retorna o DTO com as informações do usuário salvo.
         return userResponseDto;
+    }
+
+    @Override
+    public void deleteUser(Long Id) {
+        Optional<User> optionalUser = userRepository.findById(Id);
+        if(optionalUser.isPresent()){
+            userRepository.deleteById(Id);
+        } else {
+            throw new RuntimeException("Pet not found with id: " + Id);
+        }
     }
 
 
